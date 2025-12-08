@@ -7,21 +7,21 @@ API Data Collector follows a modular architecture with clear separation between 
 ## System Components
 
 ### Collectors Module
-- **Purpose**: Fetch data from various sources
+- **Purpose**: Fetch data from APIs
 - **Responsibilities**:
-  - Make HTTP requests to APIs
-  - Scrape web pages
-  - Handle authentication
+  - Make HTTP requests to REST APIs
+  - Handle authentication (API tokens)
   - Manage rate limiting
   - Error handling and retries
+  - Pagination support
 
 ### Parsers Module
 - **Purpose**: Transform raw data into structured formats
 - **Responsibilities**:
-  - Parse HTML/XML content
-  - Extract structured data from JSON
+  - Extract structured data from JSON responses
   - Normalize data formats
   - Validate data integrity
+  - Auto-detect data types
 
 ### Exporters Module
 - **Purpose**: Save collected data in various formats
@@ -39,18 +39,18 @@ The modular design allows for easy extension. New collectors, parsers, or export
 ### Why Requests Library?
 Requests provides a simple, intuitive API for making HTTP requests with excellent error handling and session management capabilities.
 
-### Why BeautifulSoup?
-BeautifulSoup is a powerful HTML/XML parser that handles malformed markup gracefully, making it ideal for web scraping tasks.
+### Why GitHub API Focus?
+The project focuses on GitHub API integration to demonstrate API consumption patterns, authentication, rate limiting, and data processing. The modular architecture allows easy extension to other APIs.
 
 ### Why PyTest?
 PyTest offers a clean, Pythonic testing framework with excellent fixtures, parametrization, and plugin ecosystem.
 
 ## Data Flow
 
-1. Collector fetches raw data from source (API or web page)
-2. Parser processes raw data into structured format
-3. Data is validated and normalized
-4. Exporter saves data to desired output format
+1. Collector fetches raw data from GitHub API
+2. Parser processes raw JSON responses into structured format
+3. Data is validated and normalized (dates, field names, etc.)
+4. Exporter saves data to desired output format (JSON/CSV)
 5. Results are stored in output directory
 
 ## Error Handling
@@ -67,11 +67,20 @@ PyTest offers a clean, Pythonic testing framework with excellent fixtures, param
 - Rate limiting configuration
 - Output format preferences
 
+## Current Implementation
+
+- GitHub API integration (repos, issues, PRs, profiles)
+- JSON and CSV export formats
+- Command-line interface
+- Configuration via environment variables
+- Comprehensive unit test coverage
+
 ## Future Enhancements
 
 - Database integration for storing collected data
 - Scheduled collection tasks
-- Data transformation pipelines
-- Support for more export formats
+- Support for additional APIs (Twitter, Reddit, etc.)
+- More export formats (Excel, Parquet)
 - Webhook notifications for completed collections
+- Web scraping capabilities (if needed)
 
